@@ -16,5 +16,17 @@ namespace BluetoothClientCSharp
         {
             InitializeComponent();
         }
+
+        private void connectButton_Click(object sender, EventArgs e)
+        {
+            if (portBox.Text == "" || iPBox.Text == "")
+            {
+                MessageBox.Show("Fields blank");
+            }
+            else
+            {
+
+            }
+        }
     }
 }
