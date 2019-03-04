@@ -40,7 +40,6 @@ namespace BluetoothClientCSharp
                     Socket socket = listener.AcceptSocket();
                     Stream networkStream = new NetworkStream(socket);
                     IPAddress address = IPAddress.Parse(iPBox.Text);
-         
                     IPEndPoint endPoint = new IPEndPoint(address, 9000);
                     socket.Connect(endPoint);
 
