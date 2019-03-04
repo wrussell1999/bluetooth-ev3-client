@@ -81,9 +81,9 @@
             // 
             // listView1
             // 
-            this.listView1.Location = new System.Drawing.Point(208, 15);
+            this.listView1.Location = new System.Drawing.Point(170, 15);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(517, 387);
+            this.listView1.Size = new System.Drawing.Size(603, 387);
             this.listView1.TabIndex = 5;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
@@ -91,7 +91,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 427);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.connectButton);
             this.Controls.Add(this.portBox);
