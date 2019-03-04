@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Client));
             this.iPBox = new System.Windows.Forms.TextBox();
             this.iPLabel = new System.Windows.Forms.Label();
             this.portLabel = new System.Windows.Forms.Label();
@@ -98,6 +99,7 @@
             this.Controls.Add(this.iPLabel);
             this.Controls.Add(this.iPBox);
             this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Client";
             this.Text = "EV3 Client";
             this.ResumeLayout(false);
