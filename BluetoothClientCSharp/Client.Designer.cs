@@ -34,7 +34,7 @@
             this.portLabel = new System.Windows.Forms.Label();
             this.portBox = new System.Windows.Forms.TextBox();
             this.connectButton = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.outputView = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // iPBox
@@ -79,20 +79,20 @@
             this.connectButton.UseVisualStyleBackColor = true;
             this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
             // 
-            // listView1
+            // outputView
             // 
-            this.listView1.Location = new System.Drawing.Point(170, 15);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(603, 387);
-            this.listView1.TabIndex = 5;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.outputView.Location = new System.Drawing.Point(170, 15);
+            this.outputView.Name = "outputView";
+            this.outputView.Size = new System.Drawing.Size(603, 387);
+            this.outputView.TabIndex = 5;
+            this.outputView.UseCompatibleStateImageBehavior = false;
             // 
             // Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 427);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.outputView);
             this.Controls.Add(this.connectButton);
             this.Controls.Add(this.portBox);
             this.Controls.Add(this.portLabel);
@@ -114,7 +114,7 @@
         private System.Windows.Forms.Label portLabel;
         private System.Windows.Forms.TextBox portBox;
         private System.Windows.Forms.Button connectButton;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView outputView;
     }
 }
 
