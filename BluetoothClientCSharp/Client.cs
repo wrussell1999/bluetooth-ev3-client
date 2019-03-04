@@ -61,7 +61,7 @@ namespace BluetoothClientCSharp
             for (int i = 0; i < 9; i++)
             {
                 string[] items = new string[1];
-                items[0] = "hello";
+                items[0] = value;
                 ListViewItem item = new ListViewItem(items);
                 outputView.Items.Add(item);
             }
