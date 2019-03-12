@@ -10,11 +10,17 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace BluetoothClientCSharp
 {
     public partial class Client : Form
     {
+        Socket socket;
+        IPEndPoint iPEndPoint;
+        private Boolean isSending = false;
+        Thread thread;
+        List<String> outputList = new List<String>();
         public Client()
         {
             InitializeComponent();
@@ -33,37 +39,86 @@ namespace BluetoothClientCSharp
             else
             {
                 connectButton.Text = "Disconnect";
-                try
-                {
-                    TcpListener listener = new TcpListener(Convert.ToInt32(portBox.Text));
-                    listener.Start();
-                    Socket socket = listener.AcceptSocket();
-                    Stream networkStream = new NetworkStream(socket);
-                    IPAddress address = IPAddress.Parse(iPBox.Text);
-                    IPEndPoint endPoint = new IPEndPoint(address, 9000);
-                    socket.Connect(endPoint);
 
-                    byte[] data = new byte[1024];
-                    int i = socket.Receive(data);
-                    string stringReceived = Encoding.ASCII.GetString(data, 0, i);
-                    addToListView(stringReceived);
-                }
-                catch (Exception ex)
+                IPHostEntry host = Dns.GetHostEntry(iPBox.Text);
+                IPAddress iPAddress = host.AddressList[0];
+                iPEndPoint = new IPEndPoint(iPAddress, Convert.ToInt32(portBox.Text));
+                socket = new Socket(iPAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                if (!isSending)
                 {
-                    MessageBox.Show(ex.Message, "Connection Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    isSending = true;
+                    thread = new Thread(Run);
+                    //thread.IsBackground = true;
+                    thread.Start();
                 }
             }
         }
 
+        public void Run()
+        {
+            try
+            {
+                socket.Connect(iPEndPoint);
+                Console.WriteLine("Conected to " + socket.RemoteEndPoint.ToString());
+                while (isSending)
+                {
+                    byte[] data = new byte[1024];
+                    int received = socket.Receive(data);
+                    String output = Encoding.ASCII.GetString(data, 0, received);
+                    outputList.Add(output);
+                    Task task = new Task(new Action(() =>
+                    {
+                        addToListView(output);
+                    }));
+                    task.Start();
+                    Thread.Sleep(1000);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Connection Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (connectButton.InvokeRequired)
+                {
+                    connectButton.Invoke((MethodInvoker) delegate()
+                    {
+                        connectButton.Text = "Connect";
+                    });
+                }
+            }
+        }
+
+        public void StopSending()
+        {
+            isSending = false;
+            if (thread.Join(200) == false)
+            {
+                thread.Abort();
+            }
+            thread = null;
+        }
+
         private void addToListView(string value)
         {
-            for (int i = 0; i < 9; i++)
+            if (outputView.InvokeRequired)
             {
-                string[] items = new string[1];
-                items[0] = value;
-                ListViewItem item = new ListViewItem(items);
-                outputView.Items.Add(item);
+                outputView.Invoke((MethodInvoker) delegate()
+                {
+                    outputView.Items.Clear();
+                    for (int i = 0; i < outputList.Count; i++)
+                    {
+                        string[] items = {outputList[i]};
+                        Console.WriteLine(outputList[i]);   
+                        ListViewItem item = new ListViewItem(items);
+                        outputView.Items.Add(item);
+                    }
+                    outputView.Refresh();
+                });
             }
+        }
+
+        private void killButton_Click(object sender, EventArgs e)
+        {
+            StopSending();
         }
     }
 }

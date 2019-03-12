@@ -35,6 +35,8 @@
             this.portBox = new System.Windows.Forms.TextBox();
             this.connectButton = new System.Windows.Forms.Button();
             this.outputView = new System.Windows.Forms.ListView();
+            this.outputColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.killButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // iPBox
@@ -81,17 +83,36 @@
             // 
             // outputView
             // 
+            this.outputView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.outputColumn});
             this.outputView.Location = new System.Drawing.Point(170, 15);
             this.outputView.Name = "outputView";
             this.outputView.Size = new System.Drawing.Size(603, 387);
-            this.outputView.TabIndex = 5;
+            this.outputView.TabIndex = 4;
             this.outputView.UseCompatibleStateImageBehavior = false;
+            this.outputView.View = System.Windows.Forms.View.Details;
+            // 
+            // outputColumn
+            // 
+            this.outputColumn.Text = "Output";
+            this.outputColumn.Width = 587;
+            // 
+            // killButton
+            // 
+            this.killButton.Location = new System.Drawing.Point(41, 112);
+            this.killButton.Name = "killButton";
+            this.killButton.Size = new System.Drawing.Size(100, 23);
+            this.killButton.TabIndex = 5;
+            this.killButton.Text = "Kill Thread";
+            this.killButton.UseVisualStyleBackColor = true;
+            this.killButton.Click += new System.EventHandler(this.killButton_Click);
             // 
             // Client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 427);
+            this.Controls.Add(this.killButton);
             this.Controls.Add(this.outputView);
             this.Controls.Add(this.connectButton);
             this.Controls.Add(this.portBox);
@@ -115,6 +136,8 @@
         private System.Windows.Forms.TextBox portBox;
         private System.Windows.Forms.Button connectButton;
         private System.Windows.Forms.ListView outputView;
+        private System.Windows.Forms.ColumnHeader outputColumn;
+        private System.Windows.Forms.Button killButton;
     }
 }
 
