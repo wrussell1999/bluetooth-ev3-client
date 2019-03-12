@@ -20,7 +20,7 @@ namespace BluetoothClientCSharp
         IPEndPoint iPEndPoint;
         private Boolean isSending = false;
         Thread thread;
-        List<String> outputList = new List<String>();
+        List<string> outputList = new List<string>();
         public Client()
         {
             InitializeComponent();
@@ -64,7 +64,7 @@ namespace BluetoothClientCSharp
                 {
                     byte[] data = new byte[1024];
                     int received = socket.Receive(data);
-                    String output = Encoding.UTF8.GetString(data, 0, received);
+                    string output = Encoding.UTF8.GetString(data, 0, received);
                     Console.WriteLine(output);
                     if (output != "")
                     {
@@ -106,7 +106,7 @@ namespace BluetoothClientCSharp
                     outputView.Items.Clear();            
                     for (int i = 0; i < outputList.Count; i++)
                     {
-                        String output = outputList[i].ToString().Trim();
+                        string output = outputList[i].ToString().Trim();
                         string[] items = {output};
                         Console.WriteLine(output);   
                         ListViewItem item = new ListViewItem(items);
