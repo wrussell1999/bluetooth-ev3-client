@@ -12,7 +12,7 @@ public class TestServer {
 		System.out.println("CONNECTED");
 		OutputStream out = client.getOutputStream();
 		DataOutputStream dOut = new DataOutputStream(out);
-		dOut.TestServer("Hello world");
+		dOut.writeUTF("Hello world");
 		dOut.flush();
 		server.close();
 	}

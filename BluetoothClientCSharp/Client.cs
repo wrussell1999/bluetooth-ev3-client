@@ -64,7 +64,7 @@ namespace BluetoothClientCSharp
                 {
                     byte[] data = new byte[1024];
                     int received = socket.Receive(data);
-                    String output = Encoding.ASCII.GetString(data, 0, received);
+                    String output = Encoding.UTF8.GetString(data, 0, received);
                     Console.WriteLine(output);
                     if (output != "")
                     {
@@ -107,7 +107,7 @@ namespace BluetoothClientCSharp
                     for (int i = 0; i < outputList.Count; i++)
                     {
                         String output = outputList[i].ToString().Trim();
-                        string[] items = {};
+                        string[] items = {output};
                         Console.WriteLine(output);   
                         ListViewItem item = new ListViewItem(items);
                         outputView.Items.Add(item);
