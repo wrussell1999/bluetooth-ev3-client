@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Hello World");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Client));
             this.iPBox = new System.Windows.Forms.TextBox();
             this.iPLabel = new System.Windows.Forms.Label();
@@ -35,8 +36,8 @@
             this.portBox = new System.Windows.Forms.TextBox();
             this.connectButton = new System.Windows.Forms.Button();
             this.outputView = new System.Windows.Forms.ListView();
-            this.outputColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.killButton = new System.Windows.Forms.Button();
+            this.outputColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // iPBox
@@ -83,19 +84,19 @@
             // 
             // outputView
             // 
+            this.outputView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.outputView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.outputColumn});
+            this.outputView.FullRowSelect = true;
+            this.outputView.GridLines = true;
+            this.outputView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
             this.outputView.Location = new System.Drawing.Point(170, 15);
             this.outputView.Name = "outputView";
             this.outputView.Size = new System.Drawing.Size(603, 387);
-            this.outputView.TabIndex = 4;
+            this.outputView.TabIndex = 0;
             this.outputView.UseCompatibleStateImageBehavior = false;
             this.outputView.View = System.Windows.Forms.View.Details;
-            // 
-            // outputColumn
-            // 
-            this.outputColumn.Text = "Output";
-            this.outputColumn.Width = 587;
             // 
             // killButton
             // 
@@ -106,6 +107,11 @@
             this.killButton.Text = "Kill Thread";
             this.killButton.UseVisualStyleBackColor = true;
             this.killButton.Click += new System.EventHandler(this.killButton_Click);
+            // 
+            // outputColumn
+            // 
+            this.outputColumn.Text = "Output";
+            this.outputColumn.Width = 400;
             // 
             // Client
             // 
@@ -136,8 +142,8 @@
         private System.Windows.Forms.TextBox portBox;
         private System.Windows.Forms.Button connectButton;
         private System.Windows.Forms.ListView outputView;
-        private System.Windows.Forms.ColumnHeader outputColumn;
         private System.Windows.Forms.Button killButton;
+        private System.Windows.Forms.ColumnHeader outputColumn;
     }
 }
 

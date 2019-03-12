@@ -65,12 +65,12 @@ namespace BluetoothClientCSharp
                     byte[] data = new byte[1024];
                     int received = socket.Receive(data);
                     String output = Encoding.ASCII.GetString(data, 0, received);
-                    outputList.Add(output);
-                    Task task = new Task(new Action(() =>
+                    Console.WriteLine(output);
+                    if (output != "")
                     {
-                        addToListView(output);
-                    }));
-                    task.Start();
+                        outputList.Add(output);
+                    }
+                    addToListView(output);
                     Thread.Sleep(1000);
                 }
             }
@@ -102,18 +102,21 @@ namespace BluetoothClientCSharp
             if (outputView.InvokeRequired)
             {
                 outputView.Invoke((MethodInvoker) delegate()
-                {
-                    outputView.Items.Clear();
+                {        
+                    outputView.Items.Clear();            
                     for (int i = 0; i < outputList.Count; i++)
                     {
-                        string[] items = {outputList[i]};
-                        Console.WriteLine(outputList[i]);   
+                        String output = outputList[i].ToString().Trim();
+                        string[] items = {};
+                        Console.WriteLine(output);   
                         ListViewItem item = new ListViewItem(items);
                         outputView.Items.Add(item);
                     }
                     outputView.Refresh();
                 });
             }
+            Console.WriteLine("Done listview " + outputList.Count);
+            Console.WriteLine(outputView.Items.Count);
         }
 
         private void killButton_Click(object sender, EventArgs e)
